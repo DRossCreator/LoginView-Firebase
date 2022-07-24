@@ -9,17 +9,23 @@
 /* Begin PBXBuildFile section */
 		7E05D27F288D5CF300A38A2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E05D27E288D5CF300A38A2D /* AppDelegate.swift */; };
 		7E05D281288D5CF300A38A2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E05D280288D5CF300A38A2D /* SceneDelegate.swift */; };
-		7E05D283288D5CF300A38A2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E05D282288D5CF300A38A2D /* ViewController.swift */; };
 		7E05D288288D5CF500A38A2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E05D287288D5CF500A38A2D /* Assets.xcassets */; };
+		7E4733E7288D62430014B177 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4733E6288D62430014B177 /* LoginViewController.swift */; };
+		7E4733E9288D62520014B177 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4733E8288D62520014B177 /* RegisterViewController.swift */; };
+		7E4733EB288D62760014B177 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4733EA288D62760014B177 /* LoginView.swift */; };
+		7E4733ED288D62840014B177 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E4733EC288D62840014B177 /* RegisterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7E05D27B288D5CF300A38A2D /* LoginView-Firebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LoginView-Firebase.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E05D27E288D5CF300A38A2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7E05D280288D5CF300A38A2D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7E05D282288D5CF300A38A2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7E05D287288D5CF500A38A2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7E05D28C288D5CF500A38A2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7E4733E6288D62430014B177 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7E4733E8288D62520014B177 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		7E4733EA288D62760014B177 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		7E4733EC288D62840014B177 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +119,8 @@
 		7E05D298288D5D8C00A38A2D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7E4733EA288D62760014B177 /* LoginView.swift */,
+				7E4733EC288D62840014B177 /* RegisterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -120,7 +128,8 @@
 		7E05D299288D5D9200A38A2D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				7E05D282288D5CF300A38A2D /* ViewController.swift */,
+				7E4733E6288D62430014B177 /* LoginViewController.swift */,
+				7E4733E8288D62520014B177 /* RegisterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,9 +203,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E05D283288D5CF300A38A2D /* ViewController.swift in Sources */,
+				7E4733E7288D62430014B177 /* LoginViewController.swift in Sources */,
 				7E05D27F288D5CF300A38A2D /* AppDelegate.swift in Sources */,
 				7E05D281288D5CF300A38A2D /* SceneDelegate.swift in Sources */,
+				7E4733ED288D62840014B177 /* RegisterView.swift in Sources */,
+				7E4733EB288D62760014B177 /* LoginView.swift in Sources */,
+				7E4733E9288D62520014B177 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
