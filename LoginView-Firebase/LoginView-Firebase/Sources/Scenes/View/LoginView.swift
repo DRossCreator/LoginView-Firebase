@@ -106,10 +106,37 @@ class LoginView: UIView {
 
     private lazy var horizontalStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 10
+        stackView.alpha = 0
+        stackView.spacing = 20
         stackView.axis = .horizontal
         stackView.distribution = .equalSpacing
+        stackView.alignment = .center
         return stackView
+    }()
+
+    private lazy var passwordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Password", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .light)
+        button.tintColor = .systemBackground
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private lazy var signUpButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Sign Up", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 18, weight: .light)
+        button.tintColor = .systemBackground
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
+    private let separator: UIView = {
+        let separator = UIView()
+        separator.backgroundColor = .systemBackground
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        return separator
     }()
 
     init() {
@@ -146,6 +173,10 @@ class LoginView: UIView {
             self.loginButton.alpha = 1.0
         })
 
+        UIView.animate(withDuration: 0.7, delay: 1.5, animations: {
+            self.horizontalStackView.alpha = 1.0
+        })
+
     }
 
     @objc private func loginButtonTap(sender: UIButton) {
@@ -156,15 +187,17 @@ class LoginView: UIView {
         UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn) {
             viewToAnimate.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
         } completion: { (_) in
-            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 2, options: .curveEaseIn) {
+            UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn) {
                 viewToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)
             } completion: { _ in }
         }
     }
 
-
-
     private func setupView() {
+
+    }
+
+    private func setupHieracly() {
         addSubview(BackgroundImageView)
         addSubview(stackView)
         stackView.addArrangedSubview(headerLabel)
@@ -173,12 +206,10 @@ class LoginView: UIView {
         buttonsStackView.addArrangedSubview(emailTextfield)
         buttonsStackView.addArrangedSubview(passwordTextfield)
         buttonsStackView.addArrangedSubview(loginButton)
-        stackView.addArrangedSubview(horizontalStackView)
-//        horizontalStackView.addArrangedSubview(<#T##view: UIView##UIView#>)
-    }
-
-    private func setupHieracly() {
-
+        buttonsStackView.addArrangedSubview(horizontalStackView)
+        horizontalStackView.addArrangedSubview(passwordButton)
+        horizontalStackView.addArrangedSubview(separator)
+        horizontalStackView.addArrangedSubview(signUpButton)
     }
 
     private func setupLayout() {
@@ -201,5 +232,11 @@ class LoginView: UIView {
 
         loginButton.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         loginButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+
+        separator.widthAnchor.constraint(equalToConstant: 1).isActive = true
+        separator.heightAnchor.constraint(equalTo: horizontalStackView.heightAnchor).isActive = true
+
+        signUpButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        passwordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
 }
