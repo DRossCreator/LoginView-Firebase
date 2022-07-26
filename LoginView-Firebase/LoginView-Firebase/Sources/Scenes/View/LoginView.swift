@@ -9,6 +9,33 @@ import UIKit
 
 class LoginView: UIView {
 
+    var signUp: Bool = true {
+        willSet {
+            if newValue {
+                passwordButton.isHidden = false
+                signUpButton.setTitle("Sign Up", for: .normal)
+                headerLabel.text = "Welcome"
+                nameTextfield.isHidden = true
+                loginButton.setTitle("Login", for: .normal)
+                separator.isHidden = false
+            } else {
+                passwordButton.isHidden = true
+                signUpButton.setTitle("Back to Login", for: .normal)
+                headerLabel.text = "Sign Up"
+                nameTextfield.isHidden = false
+                loginButton.setTitle("Register", for: .normal)
+                separator.isHidden = true
+            }
+        }
+    }
+
+    private lazy var spacing: UIView = {
+        let spacing = UIView()
+        spacing.translatesAutoresizingMaskIntoConstraints = false
+        spacing.heightAnchor.constraint(equalToConstant: -1).isActive = true
+        return spacing
+    }()
+
     private lazy var BackgroundImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.image = UIImage(named: "images-2")
@@ -22,7 +49,7 @@ class LoginView: UIView {
         stackView.alignment = .center
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.spacing = 25
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -33,7 +60,7 @@ class LoginView: UIView {
         label.font = .systemFont(ofSize: 60, weight: .light)
         label.text = "Welcome"
         label.textColor = .systemBackground
-        label.textAlignment = .center
+        label.textAlignment = .natural
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -42,7 +69,7 @@ class LoginView: UIView {
         let label = UILabel()
         label.alpha = 0.0
         label.font = .systemFont(ofSize: 14, weight: .light)
-        label.text = "This is my school project on firebase."
+        label.text = "Well done. By signing up, you've taken your first step towards a happier, healthier life."
         label.numberOfLines = 2
         label.textAlignment = .center
         label.textColor = .systemBackground
@@ -54,9 +81,25 @@ class LoginView: UIView {
         stackView.alignment = .center
         stackView.axis = .vertical
         stackView.distribution = .equalSpacing
-        stackView.spacing = 20
+        stackView.spacing = 17
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+
+    private lazy var nameTextfield: UITextField = {
+        let textfield = UITextField()
+        let whitePlaceholderText = NSAttributedString(string: "Name and Surname", attributes: [NSAttributedString.Key.foregroundColor: UIColor.systemBackground])
+        textfield.alpha = 1.0
+        textfield.layer.borderWidth = 1
+        textfield.layer.borderColor = UIColor.white.cgColor
+        textfield.textAlignment = .center
+        textfield.textColor = .systemBackground
+        textfield.layer.cornerRadius = 25
+        textfield.layer.masksToBounds = true
+        textfield.attributedPlaceholder = whitePlaceholderText
+        textfield.isHidden = true
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+        return textfield
     }()
 
     private lazy var emailTextfield: UITextField = {
@@ -124,10 +167,11 @@ class LoginView: UIView {
     }()
 
     private lazy var signUpButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton()
         button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 18, weight: .light)
         button.tintColor = .systemBackground
+        button.addTarget(self, action: #selector(registerButtonTap(sender: )), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -183,6 +227,10 @@ class LoginView: UIView {
         animateButtonTap(viewToAnimate: sender)
     }
 
+    @objc private func registerButtonTap(sender: UIButton) {
+        signUp = !signUp
+    }
+
     private func animateButtonTap(viewToAnimate: UIView) {
         UIView.animate(withDuration: 0.15, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveEaseIn) {
             viewToAnimate.transform = CGAffineTransform(scaleX: 0.92, y: 0.92)
@@ -194,19 +242,26 @@ class LoginView: UIView {
     }
 
     private func setupView() {
-
+        nameTextfield.delegate = self
+        emailTextfield.delegate = self
+        passwordTextfield.delegate = self
     }
 
     private func setupHieracly() {
         addSubview(BackgroundImageView)
         addSubview(stackView)
+
         stackView.addArrangedSubview(headerLabel)
         stackView.addArrangedSubview(DiscriptionLabel)
         stackView.addArrangedSubview(buttonsStackView)
+
+        buttonsStackView.addArrangedSubview(spacing)
+        buttonsStackView.addArrangedSubview(nameTextfield)
         buttonsStackView.addArrangedSubview(emailTextfield)
         buttonsStackView.addArrangedSubview(passwordTextfield)
         buttonsStackView.addArrangedSubview(loginButton)
         buttonsStackView.addArrangedSubview(horizontalStackView)
+
         horizontalStackView.addArrangedSubview(passwordButton)
         horizontalStackView.addArrangedSubview(separator)
         horizontalStackView.addArrangedSubview(signUpButton)
@@ -222,7 +277,9 @@ class LoginView: UIView {
         stackView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.75).isActive = true
 
-        headerLabel.heightAnchor.constraint(equalToConstant: 45).isActive = true
+//        headerLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        nameTextfield.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+        nameTextfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
         emailTextfield.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         emailTextfield.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -238,5 +295,19 @@ class LoginView: UIView {
 
         signUpButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
         passwordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+
+}
+
+extension LoginView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameTextfield.resignFirstResponder()
+        emailTextfield.resignFirstResponder()
+        passwordTextfield.resignFirstResponder()
+        return true
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
     }
 }
